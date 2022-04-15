@@ -1,0 +1,71 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>table, td, th, tr {
+    border: 1px solid grey;
+    border-collapse: collapse;
+  }
+  .hidden {
+    display: none;
+  }
+</style>
+</head>
+<body><h3>Übersicht Accounts</h3>
+<input checked="checked" id="mailbox" onchange="updateState('mailbox');" type="checkbox"> Mailbox<br/>
+<input checked="checked" id="qmail" onchange="updateState('qmail');" type="checkbox"> qmail<br/>
+<input checked="checked" id="other" onchange="updateState('other');" type="checkbox"> Other
+<table id="accounts">
+  <tr>
+    <th>Account</th>
+    <th>to Mailboxes</th>
+    <th>from Mails</th>
+    <th>qmail-Content</th>
+  </tr>
+  <tr class="mailbox">
+    <td><b>+</b></td>
+    <td>+</td>
+    <td></td>
+    <td></td>
+  <tr class="qmail">
+    <td>abuse<br/><i>.qmail-abuse</i></td>
+    <td>[your account]</td>
+    <td></td>
+    <td>[your account]
+    </td>
+  <tr class="mailbox">
+    <td><b>a-mailbox</b></td>
+    <td>a-mailbox</td>
+    <td>example</td>
+    <td></td>
+  <tr class="other">
+    <td>someone@example.com
+    </td>
+    <td></td>
+    <td>someone</td>
+    <td></td>
+  <tr class="qmail">
+    <td>someone<br/><i>.qmail-someone</i></td>
+    <td>someone</td>
+    <td></td>
+    <td>someone@example.com
+    </td>
+</tr>
+</table>
+<script>let state = {'mailbox': true, 'qmail': true, 'other': true}
+
+function updateState(type) {
+  state[type] = !state[type];
+  let table = document.getElementById('accounts');
+  rows = table.getElementsByClassName(type);
+  for (let i = 0; i < rows.length; ++i) {
+    if (state[type]) {
+      rows[i].classList.remove('hidden');
+      document.getElementById(type).setAttribute('checked', 'checked');
+    } else {
+      rows[i].classList.add('hidden');
+      document.getElementById(type).removeAttribute('checked');
+    }
+  }
+}        </script>
+</body>
+</html>
